@@ -1,0 +1,118 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Button, Card, InputBase } from "@mui/material";
+import { CardActions } from "@mui/material";
+import { CardContent } from "@mui/material";
+import { CardMedia } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import { Grid } from "@mui/material";
+import { Container } from "@mui/material";
+import { TextField } from "@mui/material";
+import { palette } from "@mui/system";
+import { blue } from "@mui/material/colors";
+// import useStyles from "../styles";
+
+import { makeStyles } from "@mui/styles";
+
+/* Hook (For my CSS) */ /*Callback Function */
+const useStyles = makeStyles((theme) => ({
+  container: {
+    /* Styles goes here */
+    // backgroundColor: "blue" /*(Example how to use) */,
+  },
+  cardGrid: {
+    padding: "20px 0",
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardMedia: {
+    paddingTop: "56.25%", // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+}));
+
+export default function MyPlant() {
+  const classes = useStyles();
+
+  return (
+    <>
+      <CssBaseline />
+
+      {/*Semantic HTML <main> (Learning Something New)*/}
+      <main className={classes.container}>
+        <div>
+          <Container maxWidth="sm">
+            <Typography
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom /* Adds Padding To The Bottom*/
+            >
+              My Plants
+            </Typography>
+            <Box
+              sx={{
+                width: 500,
+                maxWidth: "100%",
+              }}
+            >
+              <TextField fullWidth label="Search My Plants" id="fullWidth" />
+              <Typography
+                variant="h4"
+                align="center"
+                color="textPrimary"
+                gutterBottom
+                paddingTop="30px"
+              >
+                My List
+              </Typography>
+              <Grid container spacing={2} justify="center">
+                {" "}
+                {/* Grid Used For Responsive Design*/}
+                <Grid item></Grid>
+              </Grid>
+            </Box>
+          </Container>
+        </div>
+      </main>
+      <container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          <Grid item>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.cardMedia}
+                image="http://source.unsplash.com/random"
+                // plantName="Plant Name"
+                // plantType="Plant Type"
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom variant="h5">
+                  Plant Name
+                </Typography>
+                <Typography gutterBottom variant="h5">
+                  Plant Type
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary">
+                  View
+                </Button>
+                <Button size="small" color="primary">
+                  Edit
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
+      </container>
+    </>
+  );
+}

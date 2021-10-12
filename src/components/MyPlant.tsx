@@ -13,6 +13,7 @@ import { Container } from "@mui/material";
 import { TextField } from "@mui/material";
 import { palette } from "@mui/system";
 import { blue } from "@mui/material/colors";
+import PlantAdd from "./PlantAdd";
 // import useStyles from "../useStyles";
 
 // import { makeStyles } from "@mui/styles";
@@ -40,17 +41,34 @@ import { blue } from "@mui/material/colors";
 // },
 // });
 
-export default class MyPlant extends React.Component {
+type PlantInfo = {
+  id: number;
+  plantName: string;
+  plantType: string;
+};
+type stateType = {
+  plants: [PlantInfo];
+};
+type AcceptedProps = {
+  sessionToken: string;
+};
+export default class MyPlant extends React.Component<AcceptedProps, stateType> {
   //constructor
   //super
   //this.state object
   //inside constructor we need state vars
 
-  constructor(props) {
+  constructor(props: AcceptedProps) {
     super(props);
 
     this.state = {
-      plants: [],
+      plants: [
+        {
+          id: 0,
+          plantName: "",
+          plantType: "",
+        },
+      ],
     };
   }
 
@@ -67,6 +85,21 @@ export default class MyPlant extends React.Component {
       .then((res) => res.json())
       .then((plantData) => {
         this.setState({ plants: plantData });
+        console.log(`state: ${this.state.plants}`, plantData);
+      });
+  };
+
+  deletePlant = (plant: any) => {
+    fetch(`http://localhost:4000/plant/delete/${plant.id}`, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: this.props.sessionToken,
+      }),
+    })
+      .then((res) => res.json())
+      .then((plantData) => {
+        this.fetchPlants();
         console.log(plantData);
       });
   };
@@ -95,12 +128,16 @@ export default class MyPlant extends React.Component {
         {/*Semantic HTML <main> (Learning Something New)*/}
         <main>
           <div>
+            <PlantAdd
+              sessionToken={this.props.sessionToken}
+              fetchPlants={this.fetchPlants}
+            />
             <Container maxWidth="sm">
               <Typography
                 variant="h2"
                 align="center"
                 color="textPrimary"
-                gutterBottom /* Adds Padding To The Bottom*/
+                gutterBottom
               >
                 My Plants
               </Typography>
@@ -110,7 +147,11 @@ export default class MyPlant extends React.Component {
                   maxWidth: "100%",
                 }}
               >
-                <TextField fullWidth label="Search My Plants" id="fullWidth" />
+                {/* <TextField
+                  fullWidth
+                  label="Add New Plant Name"
+                  id="fullWidth"
+                />
                 <Typography
                   variant="h4"
                   align="center"
@@ -119,9 +160,31 @@ export default class MyPlant extends React.Component {
                   paddingTop="30px"
                   className="prompt"
                 >
-                  My List
-                </Typography>
-                <Grid container spacing={2} justify="center">
+                  <TextField
+                    fullWidth
+                    label="Add New Plant Type"
+                    id="fullWidth"
+                  />
+                  <Typography
+                    variant="h4"
+                    align="center"
+                    color="textPrimary"
+                    gutterBottom
+                    paddingTop="30px"
+                    className="prompt"
+                  >
+                    <div>
+                      <Button
+                        // onClick={(e) => this.addPlants()}
+                        variant="contained"
+                      >
+                        Add Plant
+                      </Button>
+                    </div>
+                    My List
+                  </Typography>
+                </Typography> */}
+                <Grid /*container spacing={2} justify="center"*/>
                   {/* Grid Used For Responsive Design*/}
                   <Grid item></Grid>
                 </Grid>
@@ -139,7 +202,7 @@ export default class MyPlant extends React.Component {
                   // plantType="Plant Type"
                 />
                 {/* return plat.map((plant, index) => { */}
-                {this.state.plants.map((plant) => (
+                {this.state.plants?.map((plant) => (
                   <div>
                     <CardContent>
                       <Typography gutterBottom variant="h5">
@@ -151,10 +214,14 @@ export default class MyPlant extends React.Component {
                     </CardContent>
                     <CardActions>
                       <Button size="small" color="primary">
-                        View
-                      </Button>
-                      <Button size="small" color="primary">
                         Edit
+                      </Button>
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={(e) => this.deletePlant(plant)}
+                      >
+                        Delete
                       </Button>
                     </CardActions>
                   </div>

@@ -14,7 +14,7 @@ type PlantInfo = {
 // };
 type AcceptedProps = {
   sessionToken: string;
-  plantId: number;
+  plantToUpdate: any;
 };
 export default class EditPlant extends React.Component<
   AcceptedProps,
@@ -31,7 +31,7 @@ export default class EditPlant extends React.Component<
 
   editPlants = () => {
     console.log(this.props);
-    fetch(`${APIURL}/plant/update/${this.props.plantId}`, {
+    fetch(`${APIURL}/plant/update/${this.props.plantToUpdate.id}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",

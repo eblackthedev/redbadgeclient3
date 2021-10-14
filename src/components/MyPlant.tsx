@@ -54,6 +54,8 @@ type stateType = {
 };
 type AcceptedProps = {
   sessionToken: string;
+  editUpdatePlant: any;
+  updateOn: any;
 };
 export default class MyPlant extends React.Component<AcceptedProps, stateType> {
   //constructor
@@ -217,7 +219,13 @@ export default class MyPlant extends React.Component<AcceptedProps, stateType> {
                     </CardContent>
                     <CardActions>
                       <Link to="/editplants">
-                        <Button size="small" color="primary">
+                        <Button
+                          onClick={() => {
+                            this.props.editUpdatePlant(plant);
+                          }}
+                          size="small"
+                          color="primary"
+                        >
                           Edit
                         </Button>
                       </Link>

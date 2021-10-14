@@ -27,8 +27,18 @@ export default class Test1 extends React.Component {
 
     this.state = {
       toggleDrawer: "open",
+      plantToUpdate: {},
+      updateActive: false,
     };
   }
+
+  editUpdatePlant = (plant) => {
+    this.setState({ plantToUpdate: plant });
+  };
+
+  updateOn = () => {
+    this.setState({ updateActive: true });
+  };
 
   toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -129,11 +139,15 @@ export default class Test1 extends React.Component {
           <Route exact path="/editplants">
             <EditPlant
               sessionToken={this.props.sessionToken}
-              plantId={this.plantId}
+              plantToUpdate={this.state.plantToUpdate}
             />
           </Route>
           <Route exact path="/">
-            <MyPlant sessionToken={this.props.sessionToken} />
+            <MyPlant
+              sessionToken={this.props.sessionToken}
+              editUpdatePlant={this.editUpdatePlant}
+              updateOn={this.updateOn}
+            />
           </Route>
           <Route exact path="/plantwishlist">
             <PlantWishlist sessionToken={this.props.sessionToken} />

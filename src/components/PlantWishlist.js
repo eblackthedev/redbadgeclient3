@@ -34,7 +34,7 @@ export default class PlantWishlist extends React.Component {
           <CardMedia
             component="img"
             height="140"
-            image="http://source.unsplash.com/random"
+            image="http://source.unsplash.com/YAVctD4P7GU"
           />
           <CardContent>
             <Typography

@@ -14,6 +14,8 @@ import { TextField } from "@mui/material";
 import { palette } from "@mui/system";
 import { blue } from "@mui/material/colors";
 import PlantAdd from "./PlantAdd";
+import EditPlant from "./EditPlant";
+import { Link } from "react-router-dom";
 // import useStyles from "../useStyles";
 
 // import { makeStyles } from "@mui/styles";
@@ -213,9 +215,11 @@ export default class MyPlant extends React.Component<AcceptedProps, stateType> {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" color="primary">
-                        Edit
-                      </Button>
+                      <Link to="/editplants">
+                        <Button size="small" color="primary">
+                          Edit
+                        </Button>
+                      </Link>
                       <Button
                         size="small"
                         color="primary"

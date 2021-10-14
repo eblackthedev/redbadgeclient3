@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MyPlant from "./MyPlant";
 import PlantWishlist from "./PlantWishlist";
 import PlantGraveyard from "./PlantGraveyard";
+import EditPlant from "./EditPlant";
 
 export default class Test1 extends React.Component {
   constructor(props) {
@@ -125,6 +126,12 @@ export default class Test1 extends React.Component {
           </AppBar>
         </Box>
         <Switch>
+          <Route exact path="/editplants">
+            <EditPlant
+              sessionToken={this.props.sessionToken}
+              plantId={this.plantId}
+            />
+          </Route>
           <Route exact path="/">
             <MyPlant sessionToken={this.props.sessionToken} />
           </Route>

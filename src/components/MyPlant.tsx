@@ -78,7 +78,7 @@ export default class MyPlant extends React.Component<AcceptedProps, stateType> {
   //   MyPlant = (this.props) => {
 
   fetchPlants = () => {
-    fetch("http://localhost:4000/plant/all", {
+    fetch(`${APIURL}/plant/all`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

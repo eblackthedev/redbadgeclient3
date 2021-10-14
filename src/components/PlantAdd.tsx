@@ -2,6 +2,7 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import { Button, Card, InputBase } from "@mui/material";
 import { TextField } from "@mui/material";
+import APIURL from "../helpers/environment";
 
 type PlantInfo = {
   id: number;
@@ -30,7 +31,7 @@ export default class AddPlant extends React.Component<
   }
 
   addPlants = () => {
-    fetch("http://localhost:4000/plant/create", {
+    fetch(`${APIURL}/plant/create`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",

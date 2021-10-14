@@ -2,6 +2,7 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import { Button, Card, InputBase } from "@mui/material";
 import { TextField } from "@mui/material";
+import APIURL from "../helpers/environment";
 
 type PlantInfo = {
   id: number;
@@ -30,7 +31,7 @@ export default class EditPlant extends React.Component<
 
   editPlants = () => {
     console.log(this.props);
-    fetch(`http://localhost:4000/plant/update/${this.props.plantId}`, {
+    fetch(`${APIURL}/plant/update/${this.props.plantId}`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",

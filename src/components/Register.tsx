@@ -2,6 +2,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import APIURL from "../helpers/environment";
 
 type SessionState = {
   email: string;
@@ -27,7 +28,7 @@ export default class Register extends React.Component<
   handleSubmit = (e: any) => {
     e.preventDefault();
     // console.log(username, password);
-    fetch("http://localhost:4000/user/register", {
+    fetch(`${APIURL}/user/register`, {
       method: "POST",
       body: JSON.stringify({
         user: {

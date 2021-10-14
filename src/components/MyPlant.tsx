@@ -16,6 +16,7 @@ import { blue } from "@mui/material/colors";
 import PlantAdd from "./PlantAdd";
 import EditPlant from "./EditPlant";
 import { Link } from "react-router-dom";
+import APIURL from "../helpers/environment";
 // import useStyles from "../useStyles";
 
 // import { makeStyles } from "@mui/styles";
@@ -92,7 +93,7 @@ export default class MyPlant extends React.Component<AcceptedProps, stateType> {
   };
 
   deletePlant = (plant: any) => {
-    fetch(`http://localhost:4000/plant/delete/${plant.id}`, {
+    fetch(`${APIURL}/plant/delete/${plant.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",

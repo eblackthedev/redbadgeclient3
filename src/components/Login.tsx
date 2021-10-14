@@ -3,6 +3,7 @@ import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import { ControlPointDuplicateTwoTone } from "@mui/icons-material";
+import APIURL from "../helpers/environment";
 
 type SessionState = {
   email: string;
@@ -28,7 +29,7 @@ export default class Login extends React.Component<
   handleSubmit = (e: any) => {
     e.preventDefault();
     // console.log(username, password);
-    fetch("http://localhost:4000/user/login", {
+    fetch(`${APIURL}/user/login`, {
       method: "POST",
       body: JSON.stringify({
         user: {
